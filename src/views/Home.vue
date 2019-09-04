@@ -1,6 +1,13 @@
 <template lang="pug">
   .home
-    textarea(v-model="text")
+    .header
+      span HTML to Pug
+      a(href="https://github.com/pecopeco/html2pug" target="_blank")
+        img(src="@/assets/github.png")
+    .text-wrap
+      textarea.text(v-model="text")
+      textarea.pugText(v-model="pugText")
+    .footer a Conversion tool built from vue + pug + stylus 
 </template>
 
 <script>
@@ -12,13 +19,15 @@ export default {
   },
   data () {
     return {
-      text: ''
+      text: '',
+      pugText: ''
     }
   },
   watch: {
     text (text) {
-      scope.convertHtml(text, {}, function (err, jade) {
-        console.log(jade)
+      scope.convertHtml(text, {}, (err, pug) => {
+        this.pugText = pug
+        console.log(pug)
       })
     }
   },
@@ -31,9 +40,56 @@ export default {
 
 <style scoped lang="stylus">
 
-textarea {
-  width 500px
-  height 200px
-  margin-top 100px
+.home {
+  display flex
+  flex-direction column
+  min-height 100%
+  .header {
+    position relative
+    display flex
+    align-items center
+    justify-content center
+    width 100%
+    height 70px
+    padding-bottom 15px
+    background #00a86b
+    color #fff
+    font-size 30px
+    img {
+      position absolute
+      top 20px
+      right 30px
+      width 35px
+      height 35px
+      cursor pointer
+    }
+  }
+  .text-wrap {
+    flex 1
+    display flex
+    margin 8px
+    textarea {
+      flex 1
+      height inherit
+      padding 10px
+      border-radius 10px
+      background #1b2b34
+      color #e0e1e1
+      outline none
+      resize none
+      &:first-child {
+        margin-right 6px
+      }
+      &:last-child {
+        margin-left 6px
+      }
+    }
+  }
+  .footer {
+    display flex
+    align-items center
+    justify-content center
+    padding 10px 0
+  }
 }
 </style>
