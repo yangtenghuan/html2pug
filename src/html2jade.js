@@ -4,7 +4,7 @@ import he from 'he'
 
 export var scope = {}
 
-var Converter, Ent, FS, Output, Parser, Path, StreamOutput, StringOutput, Writer, applyOptions, doNotEncode, entOptions, isNode, isValidJadeClassName, isValidJadeId, nspaces, publicIdDocTypeNames, systemIdDocTypeNames, useTabs, validJadeClassRegExp, validJadeIdRegExp,
+var Converter, Ent, FS, Output, Parser, StreamOutput, StringOutput, Writer, applyOptions, doNotEncode, entOptions, isValidJadeClassName, isValidJadeId, nspaces, publicIdDocTypeNames, systemIdDocTypeNames, useTabs, validJadeClassRegExp, validJadeIdRegExp,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; }
 
@@ -21,16 +21,13 @@ entOptions = {
   useNamedReferences: true
 };
 
-validJadeIdRegExp = /^[\w\-]+$/;
+validJadeIdRegExp = /^[\w-]+$/;
 
-validJadeClassRegExp = /^[\w\-]+$/;
+validJadeClassRegExp = /^[\w-]+$/;
 
 Parser = (function() {
   function Parser(options) {
-    this.options = options != null ? options : {};
-    if (isNode) {
-      this.jsdom = require('jsdom-little');
-    }
+    this.options = options != null ? options : {}
   }
 
   Parser.prototype.parse = function(arg, cb) {
@@ -41,14 +38,10 @@ Parser = (function() {
       if (this.options.inputType === "file") {
         arg = FS.readFileSync(arg, "utf8");
       }
-      if (isNode) {
-        return this.jsdom.env(arg, cb);
-      } else {
-        window = {};
-        parser = new DOMParser();
-        window.document = parser.parseFromString(arg, "text/html");
-        return cb(null, window);
-      }
+      window = {}
+      parser = new DOMParser()
+      window.document = parser.parseFromString(arg, "text/html")
+      return cb(null, window)
     }
   };
 
@@ -120,7 +113,7 @@ Writer = (function() {
           attrName = attr.nodeName;
           attrValue = attr.nodeValue;
           if (attrName === 'id' && isValidJadeId(attrValue)) {
-
+            return
           } else if (attrName === 'class') {
             invalidClassNames = node.getAttribute('class').split(/\s+/).filter(function(item) {
               return item && !isValidJadeClassName(item);
@@ -206,13 +199,12 @@ Writer = (function() {
   };
 
   Writer.prototype.writeTextLine = function(node, line, output, options) {
-    var encodeEntityRef, escapeBackslash, lines, pipe, prefix, trim, wrap, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6,
+    var encodeEntityRef, escapeBackslash, lines, pipe, prefix, wrap, _ref, _ref2, _ref3, _ref4, _ref5, _ref6,
       _this = this;
     if (options == null) {
       options = {};
     }
     pipe = (_ref = options.pipe) != null ? _ref : true;
-    trim = (_ref1 = options.trim) != null ? _ref1 : false;
     wrap = (_ref2 = options.wrap) != null ? _ref2 : true;
     encodeEntityRef = (_ref3 = options.encodeEntityRef) != null ? _ref3 : false;
     escapeBackslash = (_ref4 = options.escapeBackslash) != null ? _ref4 : false;
@@ -335,8 +327,7 @@ Converter = (function() {
   };
 
   Converter.prototype.element = function(node, output) {
-    var firstline, tagAttr, tagHead, tagName, tagText,
-      _this = this;
+    var firstline, tagAttr, tagHead, tagName, tagText
     if (!(node != null ? node.tagName : void 0)) {
       return;
     }
@@ -463,7 +454,7 @@ Converter = (function() {
     }
   };
 
-  Converter.prototype.conditional = function(node, condition, output) {
+  Converter.prototype.conditional = function(node, condition) {
     var conditionalElem, innerHTML;
     innerHTML = node.textContent.trim().replace(/\s*\[if\s+[^\]]+\]>\s*/, '').replace('<![endif]', '');
     if (innerHTML.indexOf("<!") === 0) {
@@ -523,12 +514,12 @@ Output = (function() {
   }
 
   Output.prototype.enter = function() {
-    var i, _i, _results;
+    var _results;
     if (useTabs) {
       return this.indents += '\t';
     } else {
       _results = [];
-      for (i = _i = 1; 1 <= nspaces ? _i <= nspaces : _i >= nspaces; i = 1 <= nspaces ? ++_i : --_i) {
+      for (let _i = 1; 1 <= nspaces ? _i <= nspaces : _i >= nspaces; 1 <= nspaces ? ++_i : --_i) {
         _results.push(this.indents += ' ');
       }
       return _results;
