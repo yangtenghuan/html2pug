@@ -136,7 +136,9 @@ Writer = (function() {
   };
 
   Writer.prototype.buildTagAttr = function(attrName, attrValue) {
-    if (attrValue.indexOf(this.attrQuote) === -1) {
+    if (attrName && !attrValue) {
+      return attrName
+    } else if (attrValue.indexOf(this.attrQuote) === -1) {
       return attrName + "=" + this.attrQuote + attrValue + this.attrQuote;
     } else if (attrValue.indexOf(this.nonAttrQuote) === -1) {
       return attrName + "=" + this.nonAttrQuote + attrValue + this.nonAttrQuote;
