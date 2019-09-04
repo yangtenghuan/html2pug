@@ -1,10 +1,9 @@
-
 import he from 'he'
 import parsehtml from 'parsehtml'
 
 export var scope = {}
 
-var Converter, Ent, Output, Parser, StreamOutput, StringOutput, Writer, applyOptions, doNotEncode, entOptions, isValidJadeClassName, isValidJadeId, nspaces, publicIdDocTypeNames, systemIdDocTypeNames, useTabs, validJadeClassRegExp, validJadeIdRegExp,
+var Converter, Ent, Output, Parser, StreamOutput, StringOutput, Writer, applyOptions, doNotEncode, entOptions, isValidJadeClassName, isValidJadeId, nspaces, useTabs, validJadeClassRegExp, validJadeIdRegExp,
 __hasProp = {}.hasOwnProperty,
 __extends = function(child, parent) {
   for (var key in parent) {
@@ -279,24 +278,6 @@ Writer = (function() {
 
 })()
 
-publicIdDocTypeNames = {
-  "-//W3C//DTD XHTML 1.0 Transitional//EN": "transitional",
-  "-//W3C//DTD XHTML 1.0 Strict//EN": "strict",
-  "-//W3C//DTD XHTML 1.0 Frameset//EN": "frameset",
-  "-//W3C//DTD XHTML 1.1//EN": "1.1",
-  "-//W3C//DTD XHTML Basic 1.1//EN": "basic",
-  "-//WAPFORUM//DTD XHTML Mobile 1.2//EN": "mobile"
-}
-
-systemIdDocTypeNames = {
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": "transitional",
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd": "strict",
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd": "frameset",
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd": "1.1",
-  "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd": "basic",
-  "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd": "mobile"
-}
-
 Converter = (function() {
   function Converter(options) {
     var _ref, _ref1
@@ -306,17 +287,11 @@ Converter = (function() {
   }
 
   Converter.prototype.document = function(document, output) {
-    var docTypeName, doctype, publicId, systemId
+    var docTypeName, doctype
     if (document.doctype != null) {
       doctype = document.doctype
       docTypeName = void 0
-      publicId = doctype.publicId
-      systemId = doctype.systemId
-      if ((publicId != null) && (publicIdDocTypeNames[publicId] != null)) {
-        docTypeName = publicIdDocTypeNames[publicId]
-      } else if ((systemId != null) && (systemIdDocTypeNames[systemId] != null)) {
-        docTypeName = systemIdDocTypeNames[systemId] != null
-      } else if ((doctype.name != null) && doctype.name.toLowerCase() === 'html') {
+      if ((doctype.name != null) && doctype.name.toLowerCase() === 'html') {
         docTypeName = 'html'
       }
       if (docTypeName != null) {
