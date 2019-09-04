@@ -1,6 +1,6 @@
-// 改写代码来源：https://github.com/donpark/html2jade
 
 import he from 'he'
+import parsehtml from 'parsehtml'
 
 export var scope = {}
 
@@ -40,13 +40,12 @@ Parser = (function() {
   }
 
   Parser.prototype.parse = function(arg, cb) {
-    var parser, window
+    var window
     if (!arg) {
       return cb('null file')
     } else {
       window = {}
-      parser = new DOMParser()
-      window.document = parser.parseFromString(arg, "text/html")
+      window.document = parsehtml(arg)
       return cb(null, window)
     }
   }
@@ -307,7 +306,7 @@ Converter = (function() {
   }
 
   Converter.prototype.document = function(document, output) {
-    var docTypeName, doctype, htmlEls, publicId, systemId
+    var docTypeName, doctype, publicId, systemId
     if (document.doctype != null) {
       doctype = document.doctype
       docTypeName = void 0
@@ -327,10 +326,7 @@ Converter = (function() {
     if (document.documentElement) {
       return this.children(document, output, false)
     } else {
-      htmlEls = document.getElementsByTagName('html')
-      if (htmlEls.length > 0) {
-        return this.element(htmlEls[0], output)
-      }
+      return this.element(document, output)
     }
   }
 
