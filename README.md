@@ -1,3 +1,5 @@
+### 在 [html2jade](https://github.com/donpark/html2jade) 基础上修改，修改优化了一pug些转换细节，精简了冗余代码，根据个人习惯，并上线到 https://pecopeco.github.io/html2pug/#/
+
 # vue
 
 ## Project setup
