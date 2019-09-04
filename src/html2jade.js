@@ -69,11 +69,11 @@ Writer = (function() {
     this.scalate = (_ref1 = options.scalate) != null ? _ref1 : false;
     this.attrSep = this.scalate || options.noattrcomma ? ' ' : ', ';
     if (options.double) {
-      this.attrQuote = '"';
-      this.nonAttrQuote = "'";
+      this.attrQuote = '"'
+      this.nonAttrQuote = "'"
     } else {
-      this.attrQuote = "'";
-      this.nonAttrQuote = '"';
+      this.attrQuote = '"';
+      this.nonAttrQuote = '"'
     }
     this.attrQuoteEscaped = "\\" + this.attrQuote;
     this.noEmptyPipe = (_ref2 = options.noemptypipe) != null ? _ref2 : false;
