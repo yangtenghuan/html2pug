@@ -113,7 +113,7 @@ Writer = (function() {
           attrName = attr.nodeName;
           attrValue = attr.nodeValue;
           if (attrName === 'id' && isValidJadeId(attrValue)) {
-            return
+            return ''
           } else if (attrName === 'class') {
             invalidClassNames = node.getAttribute('class').split(/\s+/).filter(function(item) {
               return item && !isValidJadeClassName(item);
@@ -711,21 +711,5 @@ scope.convertHtml = function(html, options, cb) {
         return cb(null, output.final());
       }
     }
-  });
-};
-
-scope.convertDocument = function(document, options, cb) {
-  var output, _ref;
-  if (options == null) {
-    options = {};
-  }
-  applyOptions(options);
-  output = (_ref = options.output) != null ? _ref : new StringOutput();
-  if (options.converter == null) {
-    options.converter = new Converter(options);
-  }
-  options.converter.document(document, output);
-  if (cb != null) {
-    return cb(null, output.final());
-  }
+  })
 }
