@@ -50,11 +50,10 @@ export default {
     align-items center
     justify-content center
     width 100%
-    height 70px
-    padding-bottom 15px
+    height 80px
     background #00a86b
     color #fff
-    font-size 30px
+    font-size 28px
     img {
       position absolute
       top 20px
@@ -67,7 +66,7 @@ export default {
   .text-wrap {
     flex 1
     display flex
-    margin 8px
+    margin 15px 25px 0
     textarea {
       flex 1
       height inherit
@@ -75,13 +74,14 @@ export default {
       border-radius 10px
       background #1b2b34
       color #e0e1e1
+      font-size 14px
       outline none
       resize none
       &:first-child {
-        margin-right 6px
+        margin-right 10px
       }
       &:last-child {
-        margin-left 6px
+        margin-left 10px
       }
     }
   }
@@ -90,6 +90,7 @@ export default {
     align-items center
     justify-content center
     padding 10px 0
+    font-size 13px
   }
 }
 </style>
