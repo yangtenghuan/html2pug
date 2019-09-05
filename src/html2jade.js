@@ -116,8 +116,7 @@ Writer = (function() {
         if (attr && attr.nodeName) {
           attrName = attr.nodeName
           attrValue = attr.nodeValue
-          if (attrName === 'id' && isValidJadeId(attrValue)) {
-          } else if (attrName === 'class') {
+          if (attrName === 'class') {
             invalidClassNames = node.getAttribute('class').split(/\s+/).filter(function(item) {
               return item && !isValidJadeClassName(item)
             })
@@ -131,7 +130,7 @@ Writer = (function() {
         }
       }
       if (result.length > 0) {
-        return "(" + (result.join(this.attrSep)) + ")"
+        return "(" + (result.join(' ')) + ")"
       } else {
         return ''
       }
