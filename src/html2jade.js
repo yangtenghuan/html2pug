@@ -225,6 +225,9 @@ Writer = (function() {
       line = line.trimRight()
     }
     if (line) {
+      if (line.match(/^[ ]*$/)) {
+        return
+      }
       if (encodeEntityRef) {
         line = Ent.encode(line, entOptions)
       }
