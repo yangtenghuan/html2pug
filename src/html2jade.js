@@ -688,9 +688,19 @@ scope.convertHtml = function(html, options, cb) {
       if (options.converter == null) {
         options.converter = new Converter(options)
       }
-      options.converter.document(window.document, output)
-      if (cb != null) {
-        return cb(null, output.final())
+      let document = window.document
+      if (document.children.length) {
+        for (let i = 0; i < document.children.length; i++) {
+          options.converter.document(document.children[i], output)
+        }
+        if (cb != null) {
+          return cb(null, output.final())
+        }
+      } else {
+        options.converter.document(document, output)
+        if (cb != null) {
+          return cb(null, output.final())
+        }
       }
     }
   })
