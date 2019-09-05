@@ -1,9 +1,8 @@
-import he from 'he'
 import parsehtml from 'parsehtml'
 
 export var scope = {}
 
-var Converter, Ent, Output, Parser, StreamOutput, StringOutput, Writer, applyOptions, doNotEncode, entOptions, isValidJadeClassName, isValidJadeId, nspaces, useTabs, validJadeClassRegExp, validJadeIdRegExp,
+var Converter, Output, Parser, StreamOutput, StringOutput, Writer, applyOptions, entOptions, isValidJadeClassName, isValidJadeId, nspaces, useTabs, validJadeClassRegExp, validJadeIdRegExp,
 __hasProp = {}.hasOwnProperty,
 __extends = function(child, parent) {
   for (var key in parent) {
@@ -17,13 +16,9 @@ __extends = function(child, parent) {
   return child
 }
 
-Ent = he
-
 nspaces = 2
 
 useTabs = false
-
-doNotEncode = false
 
 entOptions = {
   useNamedReferences: true
@@ -207,14 +202,13 @@ Writer = (function() {
   }
 
   Writer.prototype.writeTextLine = function(node, line, output, options) {
-    var encodeEntityRef, escapeBackslash, lines, pipe, prefix, wrap, _ref, _ref2, _ref3, _ref4, _ref5, _ref6,
+    var escapeBackslash, lines, pipe, prefix, wrap, _ref, _ref2, _ref4, _ref5, _ref6,
       _this = this
     if (options == null) {
       options = {}
     }
     pipe = (_ref = options.pipe) != null ? _ref : true
     wrap = (_ref2 = options.wrap) != null ? _ref2 : true
-    encodeEntityRef = (_ref3 = options.encodeEntityRef) != null ? _ref3 : false
     escapeBackslash = (_ref4 = options.escapeBackslash) != null ? _ref4 : false
     if (pipe && this.noEmptyPipe && line.trim().length === 0) {
       return
@@ -229,9 +223,6 @@ Writer = (function() {
     if (line) {
       if (line.match(/^[ ]*$/)) {
         return
-      }
-      if (encodeEntityRef) {
-        line = Ent.encode(line, entOptions)
       }
       if (escapeBackslash) {
         line = line.replace("\\", "\\\\")
@@ -361,11 +352,7 @@ Converter = (function() {
     } else if (this.options.bodyless && (tagName === 'html' || tagName === 'body')) {
       return this.children(node, output, false)
     } else if (tagText) {
-      if (doNotEncode) {
-        return output.writeln(tagHead + tagAttr + ' ' + tagText)
-      } else {
-        return output.writeln(tagHead + tagAttr + ' ' + Ent.encode(tagText, entOptions))
-      }
+      return output.writeln(tagHead + tagAttr + ' ' + tagText)
     } else {
       output.writeln(tagHead + tagAttr)
       return this.children(node, output)
@@ -388,15 +375,10 @@ Converter = (function() {
       } else if (nodeType === 3) {
         if (parent._nodeName === 'code') {
           return _this.text(child, output, {
-            encodeEntityRef: true,
             pipe: true
           })
         } else {
-          return _this.text(child, output, doNotEncode ? {
-            encodeEntityRef: false
-          } : {
-            encodeEntityRef: true
-          })
+          return _this.text(child, output, {})
         }
       } else if (nodeType === 8) {
         return _this.comment(child, output)
@@ -638,9 +620,6 @@ applyOptions = function(options) {
   }
   if (options.tabs != null) {
     useTabs = !!options.tabs
-  }
-  if (options.donotencode != null) {
-    return doNotEncode = !!options.donotencode
   }
 }
 
