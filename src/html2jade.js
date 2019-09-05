@@ -668,7 +668,7 @@ scope.convertHtml = function(html, options, cb) {
         options.converter = new Converter(options)
       }
       let document = window.document
-      if (document.children.length) {
+      if (document.children.length && document.nodeName === '#document-fragment') {
         for (let i = 0; i < document.children.length; i++) {
           options.converter.document(document.children[i], output)
         }
