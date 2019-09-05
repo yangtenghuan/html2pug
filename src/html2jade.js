@@ -131,7 +131,9 @@ Writer = (function() {
           }
         }
       }
-      if (result.length > 0) {
+      if (result.length > 3) {
+        return "(\n" + '  ' + indents + (result.join('\n' + '  ' + indents)) + "\n" + indents + ")"
+      } else if (result.length > 0) {
         return "(" + (result.join(' ')) + ")"
       } else {
         return ''
