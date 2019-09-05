@@ -117,7 +117,6 @@ Writer = (function() {
           attrName = attr.nodeName
           attrValue = attr.nodeValue
           if (attrName === 'id' && isValidJadeId(attrValue)) {
-            return ''
           } else if (attrName === 'class') {
             invalidClassNames = node.getAttribute('class').split(/\s+/).filter(function(item) {
               return item && !isValidJadeClassName(item)
