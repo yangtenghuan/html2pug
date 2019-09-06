@@ -5,8 +5,8 @@
       a(href="https://github.com/pecopeco/html2pug" target="_blank")
         img(src="@/assets/github.png")
     .text-wrap
-      textarea.text(v-model="text")
-      textarea.pugText(v-model="pugText")
+      textarea.text(wrap="off" v-model="text")
+      textarea.pugText(wrap="off" v-model="pugText")
     .footer a Conversion tool built from vue + pug + stylus 
 </template>
 
