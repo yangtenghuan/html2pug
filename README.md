@@ -8,30 +8,21 @@
 
 # vue
 
-## Project setup
+## 安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 运行
 ```
-npm run serve
+npm start
 ```
 
-### Compiles and minifies for production
+### 打包
 ```
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
+### 发布
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+复制dist目录下所有文件，切换到gh-pages分支，粘贴并提交
