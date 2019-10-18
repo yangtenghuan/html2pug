@@ -4,7 +4,7 @@
 
 # tips
 
-此转换工具适用于 vue 内 pug 模板，因此生成的 pug 会自动忽略 html 和 body 根节点，为避免造成一些不必要的缩进错误，在输入时尽量不要在根节点写入 html 、 body、template 以及一些非常规的节点名
+此转换工具适用于 vue 内 pug 模板，因此生成的 pug 会自动忽略 html 和 body 根节点，为避免造成一些不必要的缩进错误，在输入时尽量不要在根节点写入 html、body、template 以及一些非常规的节点名
 
 # vue
 
