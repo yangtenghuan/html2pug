@@ -20,7 +20,3 @@ npm start
 ```
 npm run build
 ```
-
-### 发布
-
-复制dist目录下所有文件，切换到gh-pages分支，粘贴并提交
